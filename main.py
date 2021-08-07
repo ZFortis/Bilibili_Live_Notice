@@ -26,14 +26,16 @@ room_list
 
 
 room_list = [  # 房间ID，每个ID用 英文逗号 隔开
-    931774
+    21615277,
+    21756924,
+    22300771
 ]
 
 tg = False  # 是否使用 Telegram 通知
-sc = False  # 是否使用 Server酱 通知
+sc = True  # 是否使用 Server酱 通知
 tg_token = ''  # Telegram机器人 的 Token
 tg_id = ''  # Telegram账号 的 ID
-sc_token = ''  # Server酱 的 Token
+sc_token = 'SCT58811TgHZjFDgG2y6XRKEIOD9GVhkJ'  # Server酱 的 Token
 
 ssl = None  # SSL
 
