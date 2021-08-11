@@ -46,11 +46,11 @@ we = True   # 是否使用 Wecom酱 通知
 tg_token = ''  # Telegram机器人 的 Token
 tg_id = ''  # Telegram账号 的 ID
 
-sc_token = 'SCT58811TgHZjFDgG2y6XRKEIOD9GVhkJ'  # Server酱 的 Token
+sc_token = ''  # Server酱 的 Token
 
-et_id = 'ww4e9e5ab27ca97cff'    #企业ID
-app_id = '1000002'  #应用ID
-app_se = 'SyZupDZ1ko1GzZFKabSMLDbuxms9ObcPKrlIc9Tr2YU'  #应用secret
+et_id = ''    #企业ID
+app_id = ''  #应用ID
+app_se = ''  #应用secret
 
 ssl = None  # SSL
 
