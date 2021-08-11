@@ -13,29 +13,44 @@ room_list
 提醒方式：
     1. Telegram
     2. Server酱（通过微信提醒）【http://sc.ftqq.com/3.version】
+    3. 微信直接提醒
 
-  Telegram：
+Telegram：
     tg: 启用则 True，否则 False
     tg_token: 你的 Bot 的 token
     tg_id: 你的tg账号的 id
 
-  Server酱：
+Server酱：
     sc: 启用则 True，否则 False
     sc_token: 你的 SCKEY
+
+Wecom酱：
+    we: 启用则 True，否则 False
+    et_id: 企业ID
+    app_id: 应用ID
+    app_se: 应用secret
 """
 
 
 room_list = [  # 房间ID，每个ID用 英文逗号 隔开
     21615277,
     21756924,
-    22300771
+    22300771,
+    5424
 ]
 
 tg = False  # 是否使用 Telegram 通知
-sc = True  # 是否使用 Server酱 通知
+sc = False  # 是否使用 Server酱 通知
+we = True   # 是否使用 Wecom酱 通知
+
 tg_token = ''  # Telegram机器人 的 Token
 tg_id = ''  # Telegram账号 的 ID
+
 sc_token = 'SCT58811TgHZjFDgG2y6XRKEIOD9GVhkJ'  # Server酱 的 Token
+
+et_id = 'ww4e9e5ab27ca97cff'    #企业ID
+app_id = '1000002'  #应用ID
+app_se = 'SyZupDZ1ko1GzZFKabSMLDbuxms9ObcPKrlIc9Tr2YU'  #应用secret
 
 ssl = None  # SSL
 
@@ -44,7 +59,9 @@ tasks = []
 
 
 async def get_message(queue):
-    s_m = send_message.SessionAio(tg_token=tg_token, tg_id=tg_id, sc_token=sc_token, loop=loop)
+    s_m = send_message.SessionAio(tg_token=tg_token, tg_id=tg_id, 
+                                    sc_token=sc_token, 
+                                    et_id=et_id, app_id=app_id, app_se=app_se, loop=loop)
     while True:
         data = await queue.get()
         print(data)
@@ -55,12 +72,11 @@ async def get_message(queue):
             room_result[data['room_id']] = True
         else:
             room_result[data['room_id']] = False
-            continue
         text = '【%s】%s\n%s' % (data['name'], '开播啦' if data['live_status'] == 'LIVE' else '下播啦',
                                time.strftime(u'%Y年%m月%d日 %H:%M:%S'.encode('unicode_escape').decode('utf8'),
                                              time.localtime()).encode('utf-8').decode('unicode_escape'))
         title = '【%s】%s' % (data['name'], '开播啦' if data['live_status'] == 'LIVE' else '下播啦')
-        await s_m.send(tg=tg, sc=sc, sc_title=title, text=text)
+        await s_m.send(tg=tg, sc=sc, we=we, sc_title=title, text=text)
 
 
 if __name__ == '__main__':
