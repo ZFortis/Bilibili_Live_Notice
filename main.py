@@ -72,6 +72,7 @@ async def get_message(queue):
             room_result[data['room_id']] = True
         else:
             room_result[data['room_id']] = False
+            continue
         text = '【%s】%s\n%s' % (data['name'], '开播啦' if data['live_status'] == 'LIVE' else '下播啦',
                                time.strftime(u'%Y年%m月%d日 %H:%M:%S'.encode('unicode_escape').decode('utf8'),
                                              time.localtime()).encode('utf-8').decode('unicode_escape'))
